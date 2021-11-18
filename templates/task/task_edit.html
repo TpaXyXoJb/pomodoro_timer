@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>Edit task</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update"/>
+        </form>
+    {% else %}
+        <p>You are not logged in.</p>
+        <a href="{% url 'login' %}">Log In</a>
+        <p> Or <a href="{% url 'signup' %}">signup here</a></p>
+
+    {% endif %}
+{% endblock content %}
