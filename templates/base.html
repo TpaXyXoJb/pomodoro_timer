@@ -1,12 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Authenthication</title>
+    <title>Django blog</title>
 </head>
 <body>
+<div>
+    <header>
+        <div>
+            <h1><a href="{% url 'home' %}">Django blog</a></h1>
+        </div>
+        {% if user.is_authenticated %}
+            <div>
+                <a href="{% url 'task_new' %}">+ New task</a>
+            </div>
+            <div>
+                <a href="{% url 'loop_new' %}">+ New loop</a>
+            </div>
+        {% endif %}
+
+    </header>
+    {% if user.is_authenticated %}
+        <p>Hi {{ user.username }}!</p>
+        <p><a href="{% url 'logout' %}">Log out</a></p>
+    {% endif %}
+
     {% block content %}
 
     {% endblock content %}
+</div>
 </body>
 </html>
