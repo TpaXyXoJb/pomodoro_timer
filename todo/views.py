@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from .forms import TaskCreationForm, TaskUpdateForm, LoopCreateForm
 
 from .models import Task, Loop
 
@@ -20,13 +21,15 @@ class TaskDetailView(DetailView):
 class TaskCreateView(CreateView):
     model = Task
     template_name = 'task/task_new.html'
-    fields = ['title', 'description']
+    form_class = TaskCreationForm
+    success_url = reverse_lazy('home')
 
 
 class TaskUpdateView(UpdateView):
     model = Task
     template_name = 'task/task_edit.html'
-    fields = ['title', 'description']
+    form_class = TaskUpdateForm
+    success_url = reverse_lazy('home')
 
 
 class TaskDeleteView(DeleteView):
@@ -43,8 +46,8 @@ class LoopDetailView(DetailView):
 
 class LoopCreateView(CreateView):
     model = Loop
-    template_name = 'loop/loop_new.html'
-    fields = ['duration', 'timeout', 'rounds']
+    template_name = 'index.html'
+    form_class = LoopCreateForm
 
 
 class LoopUpdateView(UpdateView):
@@ -68,4 +71,4 @@ def delete_tasks(request):
     Task.objects.all().delete()
     return redirect('home')
 
-    # def delete(self, request, *args, **kwargs):
+

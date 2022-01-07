@@ -7,7 +7,7 @@ class Task(models.Model):
     title = models.CharField(max_length=256)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now=True)
-    creator = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    creator = models.ForeignKey(User, null=True, default=User, on_delete=models.CASCADE)
     is_finished = models.BooleanField(default=False)
 
     def __str__(self):
@@ -20,6 +20,7 @@ class Task(models.Model):
 class Loop(models.Model):
     duration = models.CharField(max_length=16)
     timeout = models.CharField(max_length=16)
+    short_timeout = models.CharField(max_length=16)
     rounds = models.CharField(max_length=16)
     is_started = models.BooleanField(default=False)
     is_finished = models.BooleanField(default=False)

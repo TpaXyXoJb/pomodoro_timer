@@ -1,17 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 
-{% block content %}
-    {% if user.is_authenticated %}
-        <h1>Delete task</h1>
-        <form action="" method="post">
-            {% csrf_token %}
-            <p>Are you sure you want to delete "{{ task.title }}"?</p>
-            <input type="submit" value="Confirm"/>
-        </form>
-    {% else %}
-        <p>You are not logged in.</p>
-        <a href="{% url 'login' %}">Log In</a>
-        <p> Or <a href="{% url 'signup' %}">signup here</a></p>
-
-    {% endif %}
-{% endblock content %}
+{% block task_delete %}
+    <form class="tasks-head"
+          action="" method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ task.title }}"?</p>
+        <input type="submit" value="Confirm"/>
+    </form>
+{% endblock task_delete %}
