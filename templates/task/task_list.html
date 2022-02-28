@@ -1,21 +1,43 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 
-{% block content %}
-    {% if user.is_authenticated %}
-        <div>
-            {% for task in task_list %}
-                <a href="{% url 'task_detail' task.id %}">{{ task.title }}</a>
-            {% endfor %}
+{% block task_list %}
+    <a href="{% url 'task_new' %}">Добавить</a>
+
+    {% for task in task_list %}
+        <div class="tasks-list__elem tasks-list-elem">
+            {#                <div class="tasks-list-elem__number">{{ task.id }}</div>#}
+            <div class="tasks-list-elem__name"><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></div>
+            <div class="tasks-list-elem__desription">{{ task.description }}</div>
+            <div class="tasks-list-elem__time">{{ task.created_at }}</div>
+            <div class="tasks-list-elem__buttons">
+                {#                    <div class="tasks-list-elem__button tasks-list-elem__button-check">#}
+                {#                        <input type="checkbox" value="" class="">#}
+                {#                        {{ task.is_finished }}#}
+                {#                        <p>Отменить выполненной</p></div>#}
+                <div class="tasks-list-elem__button tasks-list-elem__button-edit tasks-button-edit">
+                    <a href="{% url 'task_edit' task.id %}">Р</a>
+                    <p>Редактировать</p></div>
+                <div class="tasks-list-elem__button tasks-list-elem__button-del tasks-button-del"><a
+                        href="{% url 'task_delete' task.pk %}">X</a>
+                    <p>Удалить</p></div>
+            </div>
         </div>
-        <a href='{% url 'task_delete_all' %}'>+ Delete all task</a>
-        <a href='{% url 'loop_delete_finished' %}'>+ Delete finished loops</a>
-    {% else %}
-        <p>You are not logged in.</p>
-        <a href="{% url 'login' %}">Log In</a>
-        <p> Or <a href="{% url 'signup' %}">signup here</a></p>
-
-    {% endif %}
+    {% endfor %}
 
 
 
-{% endblock content %}
+    {#    <div class="tasks-list__elem tasks-list-elem">#}
+    {##}
+    {#        <div class="tasks-list-elem__buttons">#}
+    {#            <div class="tasks-list-elem__button tasks-list-elem__button-check"><input#}
+    {#                    type="checkbox" value="" class="">#}
+    {#                <p>Отменить выполненной</p></div>#}
+    {#            <div class="tasks-list-elem__button tasks-list-elem__button-edit tasks-button-edit">#}
+    {#                Р<p>Редактировать</p></div>#}
+    {#            <div class="tasks-list-elem__button tasks-list-elem__button-del tasks-button-del">Х#}
+    {#                <p>Удалить</p></div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+
+{% endblock task_list %}

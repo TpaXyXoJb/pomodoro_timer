@@ -1,17 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 
-{% block content %}
-    {% if user.is_authenticated %}
-        <h1>Edit task</h1>
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Update"/>
-        </form>
-    {% else %}
-        <p>You are not logged in.</p>
-        <a href="{% url 'login' %}">Log In</a>
-        <p> Or <a href="{% url 'signup' %}">signup here</a></p>
-
-    {% endif %}
-{% endblock content %}
+{% block edit_task %}
+    <form class="tasks-block__edit tasks-edit tasks-head tasks-head-active" action=""
+          method="post">
+        {% csrf_token %}
+        <div class="tasks-edit__text tasks-input-text">Ред. задачи:</div>
+        {{ form.title }}
+        {{ form.description }}
+        <div class="tasks-list-elem__button tasks-list-elem__button-check">
+            {{ form.is_finished }}
+            <p>Отменить выполненной</p></div>
+        <div class="tasks-edit__add tasks-add"><input type="submit" value="Р"/></div>
+        <div class="tasks-edit__add tasks-add"><a href='{% url 'task_delete' task.pk %}'>X</a></div>
+    </form>
+{% endblock edit_task %}

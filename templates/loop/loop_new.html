@@ -1,18 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 
-{% block content %}
-    {% if user.is_authenticated %}
+{% block loop_settings %}
 
-        <h1>New loop</h1>
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Save"/>
-        </form>
-    {% else %}
-        <p>You are not logged in.</p>
-        <a href="{% url 'login' %}">Log In</a>
-        <p> Or <a href="{% url 'signup' %}">signup here</a></p>
-
-    {% endif %}
-{% endblock content %}
+{% endblock loop_settings %}
